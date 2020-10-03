@@ -8,7 +8,7 @@ import {
   Row,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Control, Form, Errors, actions } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -41,10 +41,10 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
-    console.log('Current State is: ' + JSON.stringify(values));
-    alert('Current State is: ' + JSON.stringify(values));
+    console.log("Current State is: " + JSON.stringify(values));
+    alert("Current State is: " + JSON.stringify(values));
     this.props.resetFeedbackForm();
-}
+  }
 
   render() {
     return (
@@ -94,7 +94,10 @@ class Contact extends Component {
             <hr />
           </div>
           <div className="col-md-10">
-          <Form model="feedbackForm" onSubmit={values => this.handleSubmit(values)}>
+          <Form
+              model="feedbackForm"
+              onSubmit={(values) => this.handleSubmit(values)}
+            >
               <Row className="form-group">
                 <Label htmlFor="firstName" md={2}>
                   First Name
@@ -213,6 +216,52 @@ class Contact extends Component {
                       validEmail: "Invalid email address",
                     }}
                   />
+                </Col>
+              </Row>
+             
+              <Row className="form-group">
+                <Col md={{ size: 4, offset: 2 }}>
+                  <div className="form-check">
+                    <Label check>
+                      <Control.checkbox
+                        model=".agree"
+                        name="agree"
+                        className="form-check-input"
+                      />{" "}
+                      <strong>May we contact you?</strong>
+                    </Label>
+                  </div>
+                </Col>
+                <Col md={4}>
+                  <Control.select
+                    model=".contactType"
+                    name="contactType"
+                    className="form-control"
+                  >
+                    <option>By Phone</option>
+                    <option>By Email</option>
+                  </Control.select>
+                </Col>
+              </Row>
+              <Row className="form-group">
+                <Label htmlFor="feedback" md={2}>
+                  Your Feedback
+                </Label>
+                <Col md={10}>
+                  <Control.textarea
+                    model=".feedback"
+                    id="feedback"
+                    name="feedback"
+                    rows="12"
+                    className="form-control"
+                  />
+                </Col>
+              </Row>
+              <Row className="form-group">
+                <Col md={{ size: 10, offset: 2 }}>
+                  <Button type="submit" color="primary">
+                    Send Feedback
+                  </Button>
                 </Col>
               </Row>
             </Form>
